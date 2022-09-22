@@ -19,6 +19,15 @@
     @include('admin.posts.includes.errors', ['value' => 'category'])
 </div>
 <div class="mb-3">
+    @foreach ($tags as $tag)
+        <div class="form-check form-switch">
+            <input type="checkbox" name="tags[]" id="input-tags" class="form-check-input" value="{{ $tag->id }}">
+            <label for="input-tags" class="form-check-label">{{ $tag->name }}</label>
+        </div>
+    @endforeach
+    @include('admin.posts.includes.errors', ['value' => 'tags'])
+</div>
+<div class="mb-3">
     <label for="input-post_content" class="form-label">post content</label>
     <textarea class="form-control" name="post_content" id="input-post_content" cols="30" rows="10">{{ old('post_content', $post->post_content) }}</textarea>
     @include('admin.posts.includes.errors', ['value' => 'post_content'])

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,8 @@ class PostController extends Controller
         //
         $post = new Post;
         $categories = Category::all();
-        return view('admin.posts.create', ['post' => $post, 'categories' => $categories]);
+        $tags = Tag::all();
+        return view('admin.posts.create', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -62,6 +64,7 @@ class PostController extends Controller
         $newPost->post_image = $data['post_image']; 
         $newPost->post_date = new DateTime(); 
         $newPost->save(); 
+        $newPost->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.index')->with('result-message', '"'.$newPost['title'].'"'.'Post Created')->with('result-class-message','success');
     }
@@ -90,7 +93,8 @@ class PostController extends Controller
         //
         $post = Post::findOrFail($id);
         $categories = Category::all();
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        $tags = Tag::all();
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
