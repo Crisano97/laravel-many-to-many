@@ -16,13 +16,15 @@
                             -
                         @endif
                     </span>
-                    @if (isset($post->tags))
-                        @foreach ($post->tags as $tag)
-                        <span> #{{ $tag->name }} </span>
-                        @endforeach
-                    @else
-                        <span>no tag</span>                            
-                    @endif
+                    <span>  
+                        @if (isset($post->tags))
+                            @foreach ($post->tags as $tag)
+                                #{{ $tag->name }}
+                            @endforeach
+                        @else
+                            no tag                            
+                        @endif
+                    </span>
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <span>{{ $post->user->name }}</span>
                     <span>{{ $post->post_date }}</span>

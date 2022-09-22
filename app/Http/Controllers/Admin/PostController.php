@@ -65,7 +65,9 @@ class PostController extends Controller
         $newPost->post_date = new DateTime(); 
         $newPost->category_id = $data['category_id'];
         $newPost->save(); 
-        $newPost->tags()->sync($data['tags']);
+        if(array_key_exists('tags', $data)){
+            $newPost->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index')->with('result-message', '"'.$newPost['title'].'"'.'Post Created')->with('result-class-message','success');
     }
@@ -115,7 +117,9 @@ class PostController extends Controller
         $newPost = Post::findOrFail($id);
         
         $newPost->update($data); 
-        $newPost->tags()->sync($data['tags']);
+        if(array_key_exists('tags', $data)){
+            $newPost->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index', $newPost->id)->with('result-message', '"'.$newPost->title.'"'.'Post Edited')->with('result-class-message','success');
     }
