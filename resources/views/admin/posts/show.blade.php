@@ -16,6 +16,11 @@
                             -
                         @endif
                     </span>
+                    <span>
+                    @foreach ($post->tags as $tag)
+                        <span>#{{ $tag->name }}</span>
+                    @endforeach
+                    <span></span>
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <span>{{ $post->user->name }}</span>
                     <span>{{ $post->post_date }}</span>
