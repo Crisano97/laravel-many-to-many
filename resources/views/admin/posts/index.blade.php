@@ -17,7 +17,7 @@
                         <th>Author</th>
                         <th>Title</th>
                         <th>Category</th>
-                        <th></th>
+                        <th>Tags</th>
                     </thead>
                     <tbody>
                         @forelse ($posts as $post)
@@ -33,6 +33,17 @@
                                         @else
                                             style="background-color: red">
                                             -
+                                        @endif
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>  
+                                        @if (isset($post->tags))
+                                            @foreach ($post->tags as $tag)
+                                                #{{ $tag->name }}
+                                            @endforeach
+                                        @else
+                                            no tag
                                         @endif
                                     </span>
                                 </td>

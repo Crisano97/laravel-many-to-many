@@ -22,7 +22,7 @@
                                 #{{ $tag->name }}
                             @endforeach
                         @else
-                            no tag                            
+                            no tag
                         @endif
                     </span>
                     <h5 class="card-title">{{ $post->title }}</h5>

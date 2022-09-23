@@ -111,6 +111,7 @@ class PostController extends Controller
     {
         //
         $data = $request->all();
+        // dd($data);
         
         $validatedData = $request->validate($this->validationRules);
 
@@ -121,7 +122,7 @@ class PostController extends Controller
             $newPost->tags()->sync($data['tags']);
         }
 
-        return redirect()->route('admin.posts.index', $newPost->id)->with('result-message', '"'.$newPost->title.'"'.'Post Edited')->with('result-class-message','success');
+        return redirect()->route('admin.posts.show', $newPost->id)->with('result-message', '"'.$newPost->title.'"'.'Post Edited')->with('result-class-message','success');
     }
 
     /**
