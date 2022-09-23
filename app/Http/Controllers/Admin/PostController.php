@@ -16,7 +16,7 @@ class PostController extends Controller
         'title' => 'required|min:3|max:255',
         'post_content' => 'required|min:5',
         'post_image' => 'active_url',
-        'category' => 'exists:categories,id',
+        'category_id' => 'nullable|exists:categories,id',
         'tags' => 'exists:tags,id',
 
     ];

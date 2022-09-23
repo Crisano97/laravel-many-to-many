@@ -12,11 +12,11 @@
                     {{ $category->id === $post->category->id ? 'selected' : ''}}
                 @endisset
                 >
-                {{ old('category', $category->name )}}
+                {{ old('category_id', $category->name )}}
             </option>
         @endforeach
     </select>
-    @include('admin.posts.includes.errors', ['value' => 'category'])
+    @include('admin.posts.includes.errors', ['value' => 'category_id'])
 </div>
 <div class="mb-3">
     @foreach ($tags as $tag)
