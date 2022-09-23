@@ -59,15 +59,16 @@ class PostController extends Controller
 
         $newPost = new Post;
         $newPost->user_id = Auth::id();
-        $newPost->title = $data['title']; 
-        $newPost->post_content = $data['post_content']; 
-        $newPost->post_image = $data['post_image']; 
-        $newPost->post_date = new DateTime(); 
-        $newPost->category_id = $data['category_id'];
+        // $newPost->title = $data['title']; 
+        // $newPost->post_content = $data['post_content']; 
+        // $newPost->post_image = $data['post_image']; 
+        // $newPost->post_date = new DateTime(); 
+        // $newPost->category_id = $data['category_id'];
+        $data['user_id'] = Auth::id();
+        $data['post_date'] = new DateTime();
+        $newPost->fill($data);
         $newPost->save(); 
-        if(array_key_exists('tags', $data)){
-            $newPost->tags()->sync($data['tags']);
-        }
+        $newPost->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.index')->with('result-message', '"'.$newPost['title'].'"'.'Post Created')->with('result-class-message','success');
     }
@@ -120,6 +121,8 @@ class PostController extends Controller
         $newPost->update($data); 
         if(array_key_exists('tags', $data)){
             $newPost->tags()->sync($data['tags']);
+        } else {
+            $newPost->tags()->detach();
         }
 
         return redirect()->route('admin.posts.show', $newPost->id)->with('result-message', '"'.$newPost->title.'"'.'Post Edited')->with('result-class-message','success');
