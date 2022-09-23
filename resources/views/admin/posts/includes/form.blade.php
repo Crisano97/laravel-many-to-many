@@ -23,7 +23,7 @@
         <div class="form-check form-switch">
             @if ($errors->any())
                 <input type="checkbox" name="tags[]" id="input-tags" class="form-check-input" value="{{ $tag->id }}"
-                {{ in_array($tags->id, old('tags', [])) ? 'checked' : '' }}>
+                {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
             @else
                 <input type="checkbox" name="tags[]" id="input-tags" class="form-check-input" value="{{ $tag->id }}"
                 {{ $post->tags->contains($tag) ? 'checked' : '' }}>
