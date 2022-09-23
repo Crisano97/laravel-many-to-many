@@ -71,7 +71,9 @@ class PostController extends Controller
         $data['post_date'] = new DateTime();
         $newPost->fill($data);
         $newPost->save(); 
-        $newPost->tags()->sync($data['tags']);
+        if (array_key_exists('tag', $data)) {
+            $newPost->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index')->with('result-message', '"'.$newPost['title'].'"'.'Post Created')->with('result-class-message','success');
     }
