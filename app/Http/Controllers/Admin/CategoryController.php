@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +69,8 @@ class CategoryController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        return view('admin.categories.show', compact('category'));
+        $posts = Post::all();
+        return view('admin.categories.show', compact(['category', 'posts']));
     }
 
     /**
