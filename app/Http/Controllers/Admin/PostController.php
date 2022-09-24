@@ -146,4 +146,13 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('result-message', '"'.$post->title.'"'.'Post Deleted')->with('result-class-message','danger');
     }
+
+    public function removePostFromCategory ($id)
+    {
+        $post = Post::findOrFail($id);
+        $category_id = $post->category_id;
+        $post->category_id = null;
+        $post->save();
+        return redirect()->route('admin.categories.show', $category_id);
+    }
 }

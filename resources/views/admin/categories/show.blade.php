@@ -48,6 +48,12 @@
                             
                             <p class="card-text">{{ $post->post_content }}</p>
                         </div>
+                        <form action="{{ route('admin.removePostFromCategory', $post->id) }}" method="POST" class="d-inline delete-comics">
+                            @csrf
+                            @method('PUT')
+                            
+                            <button type="submit" class="btn btn-sm btn-warning">Remove poste from this category</button>
+                        </form>
                     </div>
                 </div>
                 @empty
@@ -57,7 +63,7 @@
                 <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-success">
                     Edit
                 </a>
-                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline delete-comics">
+                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline delete-method">
                     @csrf
                     @method('DELETE')
                     
