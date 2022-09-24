@@ -5,18 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <div class="card text-center ">
-                <img src="{{ $post->post_image }}" class="card-img-top" alt="{{ $post->title }}">
                 <div class="card-body">
                     <span class="badge text-white" 
-                        @if (isset($post->category))
-                            style="background-color: {{ $post->category->color }}">
-                            {{ $post->category->name }}
+                        @if (isset($category))
+                            style="background-color: {{ $category->color }}">
+                            {{ $category->name }}
                         @else
                             style="background-color: red">
                             -
                         @endif
                     </span>
-                    <span>  
+                    {{-- <span>   --}}
                         {{-- @if (isset($post->tags))
                             @foreach ($post->tags as $tag)
                                 #{{ $tag->name }}
@@ -24,7 +23,7 @@
                         @else
                             no tag
                         @endif --}}
-                        @forelse ($post->tags as $tag)
+                        {{-- @forelse ($post->tags as $tag)
                             <span>
                                 #{{ $tag->name }}
                             </span>
@@ -38,15 +37,15 @@
                     <span>{{ $post->user->name }}</span>
                     <span>{{ $post->post_date }}</span>
                     
-                    <p class="card-text">{{ $post->post_content }}</p>
+                    <p class="card-text">{{ $post->post_content }}</p> --}}
                 </div>
                 
             </div>
             <div class="text-center mt-4">
-                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-success">
+                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-success">
                     Edit
                 </a>
-                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="d-inline delete-comics">
+                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline delete-comics">
                     @csrf
                     @method('DELETE')
                     

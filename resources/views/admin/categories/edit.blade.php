@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="post">
                 @csrf
                 @method('PUT')
 
-                @include('admin.posts.includes.form')
+                @include('admin.categories.includes.form')
             </form>
         </div>
     </div>

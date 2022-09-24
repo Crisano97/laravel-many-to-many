@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -49,6 +50,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -59,7 +62,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -72,6 +76,12 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $category = Category::findOrFail($id);
+        $data['id'] = Auth::id();
+        $category->fill($data);
+        $category->save();
+        return redirect()->route('admin.categories.index', $category->id);
     }
 
     /**

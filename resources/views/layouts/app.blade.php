@@ -45,6 +45,11 @@
                                     Create new post
                                 </a>
                             </li>
+                            <li class="mx-3">
+                                <a href="{{ route('admin.categories.index') }}">
+                                    Categories
+                                </a>
+                            </li>
                         @endguest
                     </ul>
 
