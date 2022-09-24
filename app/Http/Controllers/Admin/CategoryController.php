@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,8 +41,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
+        //
+        $request->validate([
+            'name'=> 'required|unique:categories,name',
+            'color'=> 'required|unique:categories,color',
+        ]);
+        
         $newCategory = new Category();
         // $data['name'] = $category->name;
         // $data['color'] = $category->color;
@@ -86,13 +92,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $data = $request->all();
         $category = Category::findOrFail($id);
+
+        $request->validate([
+            'name'=> [
+                'required',
+                Rule::unique('categories')->ignore($category->name, 'name')
+            ],
+            'color'=> [
+                'required',
+                Rule::unique('categories')->ignore($category->color, 'color')
+            ],
+        ]);
+
         $data['id'] = Auth::id();
         $category->fill($data);
         $category->save();
-        return redirect()->route('admin.categories.index', $category->id);
+        return redirect()->route('admin.categories.index');
     }
 
     /**
