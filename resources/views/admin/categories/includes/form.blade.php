@@ -1,6 +1,8 @@
 <div class="mb-3">
-    <label for="input-title" class="form-label">title</label>
+    <label for="input-name" class="form-label">name</label>
     <input type="text" class="form-control" id="input-name" name="name" value="{{ old('name', $category->name) }}">
+    <label for="input-color" class="form-label">color</label>
+    <input type="text" class="form-control" id="input-color" name="color" value="{{ old('color', $category->color) }}">
     @include('admin.categories.includes.errors', ['value' => 'name'])
 </div>
 {{-- <div class="mb-3">

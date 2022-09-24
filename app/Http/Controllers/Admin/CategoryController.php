@@ -28,6 +28,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        $category = new Category();
+        return view('admin.categories.create', compact('category'));
     }
 
     /**
@@ -39,6 +41,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        $newCategory = new Category();
+        // $data['name'] = $category->name;
+        // $data['color'] = $category->color;
+        // $newCategory->fill($data);
+        $newCategory->name = $data['name'];
+        $newCategory->color = $data['color'];
+        $newCategory->save(); 
+        return redirect()->route('admin.categories.index');
     }
 
     /**

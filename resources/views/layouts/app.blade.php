@@ -50,6 +50,11 @@
                                     Categories
                                 </a>
                             </li>
+                            <li class="mx-3">
+                                <a href="{{ route('admin.categories.create') }}">
+                                    Add a new Category
+                                </a>
+                            </li>
                         @endguest
                     </ul>
 
