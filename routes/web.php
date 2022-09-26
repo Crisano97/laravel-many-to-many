@@ -27,7 +27,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('/posts', 'PostController');
         Route::resource('/categories', 'CategoryController');
-        Route::put('/post/{id}clearCategory', 'PostController@removePostFromCategory')->name('removePostFromCategory');
+        Route::put('/post/{id}removePostFromCategory', 'PostController@removePostFromCategory')->name('removePostFromCategory');
 });
 
 // Route::get('/home', 'Admin\HomeController@index')->name('home');
