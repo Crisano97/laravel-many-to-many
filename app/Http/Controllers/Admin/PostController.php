@@ -16,7 +16,7 @@ class PostController extends Controller
     protected $validationRules = [
         'title' => 'required|min:3|max:255',
         'post_content' => 'required|min:5',
-        'post_image' => 'image',
+        'post_image' => 'image|max:256',
         'category_id' => 'nullable|exists:categories,id',
         'tags' => 'exists:tags,id',
 
@@ -122,7 +122,7 @@ class PostController extends Controller
         // dd($data);
         
         $validatedData = $request->validate($this->validationRules);
-
+        $data['post_image'] = Storage::put('uploads', $data['post_image']);
         $newPost = Post::findOrFail($id);
         
         $newPost->update($data); 
