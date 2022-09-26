@@ -38,9 +38,14 @@
     <textarea class="form-control" name="post_content" id="input-post_content" cols="30" rows="10">{{ old('post_content', $post->post_content) }}</textarea>
     @include('admin.posts.includes.errors', ['value' => 'post_content'])
 </div>
-<div class="mb-3">
+{{-- <div class="mb-3">
     <label for="input-post_image" class="form-label">post_image</label>
     <input type="text" class="form-control" id="input-post_image" name="post_image" value="{{ old('post_image', $post->post_image) }}">
+    @include('admin.posts.includes.errors', ['value' => 'post_image'])
+</div> --}}
+<div class="mb-3">
+    <label for="input-post_image" class="form-label">post_image</label>
+    <input type="file" class="form-control" id="input-post_image" name="post_image" value="{{ old('post_image', $post->post_image) }}">
     @include('admin.posts.includes.errors', ['value' => 'post_image'])
 </div>
 

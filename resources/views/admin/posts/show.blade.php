@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <div class="card text-center ">
-                <img src="{{ $post->post_image }}" class="card-img-top" alt="{{ $post->title }}">
+                <img src="{{ asset('storage/' . $post->post_image) }}" class="card-img-top" alt="{{ $post->title }}">
                 <div class="card-body">
                     <span class="badge text-white" 
                         @if (isset($post->category))

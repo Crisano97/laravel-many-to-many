@@ -9,13 +9,14 @@ use App\Models\Tag;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     protected $validationRules = [
         'title' => 'required|min:3|max:255',
         'post_content' => 'required|min:5',
-        'post_image' => 'active_url',
+        'post_image' => 'image',
         'category_id' => 'nullable|exists:categories,id',
         'tags' => 'exists:tags,id',
 
@@ -69,6 +70,7 @@ class PostController extends Controller
         // $newPost->category_id = $data['category_id'];
         $data['user_id'] = Auth::id();
         $data['post_date'] = new DateTime();
+        $data['post_image'] = Storage::put('uploads', $data['post_image']);
         $newPost->fill($data);
         $newPost->save(); 
         if (array_key_exists('tag', $data)) {
